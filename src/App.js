@@ -1,39 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-import {useReducer} from 'react';
+import './App.css'
+import { connect } from 'react-redux'
 
+const App = props => {
 
-function reducer (state, action){
-  switch(action.type){
-    case 'ASD_ONE': {
-      return {}
-    }
-    case 'SUB_ONE': {
-      return {}
-    }
-  }
-  return state;
-}
-const App =props=> {
-  const [state, dispatch] = useReducer(reducer, 
-    {count: 0});
+  const {count, dispatch} = props
   const increment = () => {
-    dispatch({
-      type: 'ASD_ONE',
-      count: state.count+1})
+    const action =  {
+      type: 'INCREMENT_COUNT'
+    }
+   dispatch(action)
   }
   const decrement = () => {
-    dispatch({
-      type: 'SUB_ONE',
-      count: state.count-1})
+    const action =  {
+      type: 'DECREMENT_COUNT'
+    }
+   dispatch(action)
   }
   return (
-    <div className="App">
- <h1>{state.count}</h1>
- <button onClick={increment}>+</button>
- <button onClick={decrement}>-</button>
+    <div className='App'>
+      <h1>{count}</h1>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
     </div>
-  );
+  )
 }
-
-export default App;
+const mapStateToProps = state => {
+  return state
+}
+export default connect(mapStateToProps)(App)
