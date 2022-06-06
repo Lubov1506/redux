@@ -1,30 +1,36 @@
 import './App.css'
 import { connect } from 'react-redux'
-
+import { increment, decrement, changeStep } from './actions/actionCreators'
 const App = props => {
-
-  const {count, dispatch} = props
-  const increment = () => {
-    const action =  {
-      type: 'INCREMENT_COUNT'
-    }
-   dispatch(action)
+  const { count, step } = props
+  const inc = () => {
+    props.increment()
   }
-  const decrement = () => {
-    const action =  {
-      type: 'DECREMENT_COUNT'
-    }
-   dispatch(action)
+  const dec = () => {
+    props.decrement()
+  }
+
+  const handlerInput = ({ target: { value } }) => {
+    props.changeStep(Number(value))
   }
   return (
     <div className='App'>
       <h1>{count}</h1>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
+      <input type='number' value={step} onChange={handlerInput} />
+      <button onClick={inc}>+</button>
+      <button onClick={dec}>-</button>
     </div>
   )
 }
 const mapStateToProps = state => {
-  return state
+  return {
+    count: state.count,
+    step: state.step
+  }
 }
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = {
+  increment,
+  decrement,
+  changeStep
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App)
