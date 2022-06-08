@@ -39,3 +39,25 @@ export const deleteTaskAction = (id)=>{
         id
     }
 }
+
+
+///////________USERS________//////////
+
+export const createUserRequestAction = (values)=> {
+    return{
+        type: ACTION_TYPES.CREATE_USER_REQUEST,
+        values
+    }
+}
+export const createUserSuccessAction = (values)=> {
+    return{
+        type: ACTION_TYPES.CREATE_USER_SUCCESS,
+        values
+    }
+}
+export const createUserErrorAction = (error)=> {
+    return{
+        type: ACTION_TYPES.CREATE_USER_ERROR,
+        error
+    }
+}
