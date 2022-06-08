@@ -1,7 +1,8 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik';
 import {createUserRequestAction} from '../../actions/actionCreators'
-import { connect } from 'formik';
+import { connect } from 'react-redux'
+
 
 const UserForm = props => {
     const onSubmitForm = (values, formikBag) => {
