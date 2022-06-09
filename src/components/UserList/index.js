@@ -1,17 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { useEffect } from 'react'
+import { getUsersRequestAction } from '../../actions/actionCreators'
 
 const UserList = props => {
   const { users, isFetching, error } = props
+
+  useEffect(() => {
+    props.getUsersRequestAction({
+      limit: 5,
+      offset: 0
+    })
+  }, [])
+
   return (
     <div>
-      {isFetching && <p>Loading...</p>}
-      {error && error}
-      {users.map(u => {
-        return <li key={u.id}>{JSON.stringify(u)}</li>
-      })}
+      {isFetching && <p>Loading....</p>}
+      {error && <p>Some error</p>}
+      {users
+        ? users.map(u => {
+            return <li key={u.id}>{JSON.stringify(u)}</li>
+          })
+        : null}
     </div>
   )
 }
 const mapStateToProps = ({ user }) => user
-export default connect(mapStateToProps)(UserList)
+const mapDispatchToProps = {
+  getUsersRequestAction
+}
+export default connect(mapStateToProps, mapDispatchToProps)(UserList)
