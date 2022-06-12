@@ -13,10 +13,16 @@ const UserList = props => {
     })
   }, [])
 
+  const loadMore = () =>{
+    props.getUsersRequestAction({
+      offset: users.length
+    })
+  }
   return (
     <div>
       {isFetching && <p>Loading....</p>}
       {error && <p>Some error</p>}
+      <button onClick={loadMore}>Load more Users</button>
       {users
         ? users.map(u => {
             return <li key={u.id}>{JSON.stringify(u)}</li>

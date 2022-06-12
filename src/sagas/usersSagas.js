@@ -2,6 +2,7 @@ import * as API from '../api'
 import { put } from 'redux-saga/effects'
 import * as ActionCreators from '../actions/actionCreators'
 
+// sagaWorkers
 export function * createUserSaga (action) {
   try {
     const {
